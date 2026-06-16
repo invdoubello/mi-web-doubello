@@ -1,0 +1,554 @@
+html_content = """<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversiones Doubello LLC | Amazon Retail Partner</title>
+    <style>
+        :root {
+            --primary-color: #0f172a; /* Deep Slate Blue */
+            --secondary-color: #ff9900; /* Amazon Amber/Orange Accent */
+            --text-dark: #334155;
+            --text-light: #f8fafc;
+            --bg-light: #f1f5f9;
+            --bg-white: #ffffff;
+            --accent-blue: #1e3a8a;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+        }
+
+        /* Language Switching Classes */
+        .lang-en { display: none; }
+        .lang-es { display: block; }
+
+        body.show-en .lang-en { display: block; }
+        body.show-en .lang-es { display: none; }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+            margin-left: 5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        .lang-btn {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .lang-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 14px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(255, 153, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            background-color: #ffaa22;
+        }
+
+        /* Sections General */
+        section {
+            padding: 90px 20px;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        /* About Us Section */
+        .about {
+            background-color: var(--bg-white);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        /* Model / Features Section */
+        .model {
+            background-color: var(--bg-light);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-white);
+            padding: 35px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: translateY 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--secondary-color);
+        }
+
+        .card-icon {
+            font-size: 36px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--bg-white);
+        }
+
+        .contact-wrapper {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 25px;
+            color: #475569;
+            font-size: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .info-item strong {
+            width: 100px;
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            flex: 1.5;
+            min-width: 300px;
+            background-color: var(--bg-light);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 15px;
+            background-color: var(--bg-white);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e293b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; /* In a full template you'd build a hamburger menu */
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .contact-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Inversiones<span>Doubello LLC</span></a>
+            <ul class="nav-menu">
+                <li class="lang-es"><a href="#inicio">Inicio</a></li>
+                <li class="lang-es"><a href="#nosotros">Quiénes Somos</a></li>
+                <li class="lang-es"><a href="#modelo">Nuestro Modelo</a></li>
+                <li class="lang-es"><a href="#contacto">Contacto</a></li>
+                
+                <li class="lang-en"><a href="#inicio">Home</a></li>
+                <li class="lang-en"><a href="#nosotros">About Us</a></li>
+                <li class="lang-en"><a href="#modelo">Our Model</a></li>
+                <li class="lang-en"><a href="#contacto">Contact Us</a></li>
+
+                <li>
+                    <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">EN / ES</button>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="lang-es">
+                <h1>Conectando las Mejores Marcas Mayoristas con Millones de Compradores en Amazon</h1>
+                <p>Inversiones Doubello LLC es tu socio estratégico en comercio electrónico. Compramos tu inventario al por mayor y posicionamos estratégicamente tus productos en el mercado más grande del mundo.</p>
+                <a href="#contacto" class="cta-btn">Trabaja con Nosotros</a>
+            </div>
+            <div class="lang-en">
+                <h1>Connecting Top Wholesale Brands with Millions of Amazon Shoppers</h1>
+                <p>Inversiones Doubello LLC is your trusted e-commerce retail partner. We buy your wholesale inventory and strategically position your products on the world's largest marketplace.</p>
+                <a href="#contacto" class="cta-btn">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="about">
+        <div class="section-container">
+            <h2 class="section-title lang-es">Quiénes Somos</h2>
+            <h2 class="section-title lang-en">About Us</h2>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="lang-es">
+                        <p><strong>Sobre Inversiones Doubello LLC:</strong> Somos una empresa de comercio electrónico establecida y especializada en ventas a través de la plataforma de Amazon. A diferencia de un vendedor de terceros tradicional, nos consideramos verdaderos socios comerciales de nuestros distribuidores mayoristas.</p>
+                        <p>Nuestra misión es distribuir productos de alta calidad de forma fluida y eficiente, protegiendo en todo momento la integridad y reputación de la marca, optimizando las publicaciones y gestionando de principio a fin la compleja logística del comercio electrónico moderno.</p>
+                    </div>
+                    <div class="lang-en">
+                        <p><strong>About Inversiones Doubello LLC:</strong> We are an established e-commerce company specializing in Amazon retail. Unlike typical third-party sellers, we view ourselves as true commercial partners to our wholesale distributors.</p>
+                        <p>Our mission is to seamlessly and efficiently distribute high-quality products while protecting brand integrity and reputation at all times, optimizing listings, and managing the complex logistics of modern e-commerce from start to finish.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="modelo" class="model">
+        <div class="section-container">
+            <h2 class="section-title lang-es">Nuestro Modelo de Negocio</h2>
+            <h2 class="section-title lang-en">Our Business Model</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">📦</div>
+                    <div class="lang-es">
+                        <h3>Compra Confiable</h3>
+                        <p>Realizamos pedidos mayoristas consistentes y pagos por adelantado para mantener el flujo de caja de su negocio en constante movimiento.</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Reliable Purchasing</h3>
+                        <p>We place consistent, upfront wholesale orders to keep your business's cash flow moving smoothly.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🚀</div>
+                    <div class="lang-es">
+                        <h3>Experiencia en Amazon</h3>
+                        <p>Manejamos las estrictas normativas de la plataforma, la optimización de listados (SEO) y toda la logística avanzada de Amazon FBA.</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Amazon Expertise</h3>
+                        <p>We handle strict platform regulations, product listing optimization (SEO), and the advanced logistics of Amazon FBA.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <div class="lang-es">
+                        <h3>Protección de Marca</h3>
+                        <p>Respetamos rigurosamente las políticas de Precios Mínimos Anunciados (MAP) y nos aseguramos de dar una representación premium a sus productos.</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Brand Protection</h3>
+                        <p>We strictly respect Minimum Advertised Price (MAP) policies and guarantee your products receive a premium presentation.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <div class="lang-es">
+                        <h3>Expansión Real</h3>
+                        <p>Ayudamos a que sus productos alcancen nuevas audiencias y mercados masivos sin que represente un costo o esfuerzo extra de marketing para usted.</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Market Expansion</h3>
+                        <p>We help your products reach massive new audiences and markets without any extra cost or marketing effort from your side.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact">
+        <div class="section-container">
+            <h2 class="section-title lang-es">Contacto</h2>
+            <h2 class="section-title lang-en">Contact Us</h2>
+
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="lang-es">
+                        <h3>Crezcamos Juntos</h3>
+                        <p>¿Es usted un mayorista, distribuidor o propietario de marca que busca expandir sus canales de venta de forma segura? Comuníquese con nuestro equipo de compras hoy mismo.</p>
+                    </div>
+                    <div class="lang-en">
+                        <h3>Let's Grow Together</h3>
+                        <p>Are you a wholesaler, distributor, or brand owner looking to safely expand your sales channels? Reach out to our purchasing team today.</p>
+                    </div>
+                    
+                    <div class="info-item"><strong>Email:</strong> invdoubello@gmail.com</div>
+                    <div class="info-item"><strong>Phone:</strong> +1 (346) 606-5743</div>
+                    <div class="info-item"><strong>Location:</strong> United States</div>
+                </div>
+
+                <div class="contact-form">
+                    <form action="#" method="POST" onsubmit="alert('Thank you! / ¡Gracias!'); return false;">
+                        <div class="form-group">
+                            <label class="lang-es" for="name">Nombre Completo</label>
+                            <label class="lang-en" for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="lang-es" for="company">Nombre de la Empresa</label>
+                            <label class="lang-en" for="company">Company Name</label>
+                            <input type="text" id="company" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="lang-es" for="email">Correo Electrónico</label>
+                            <label class="lang-en" for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="lang-es" for="message">Mensaje / Catálogo de Productos</label>
+                            <label class="lang-en" for="message">Message / Product Catalog Summary</label>
+                            <textarea id="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span class="lang-es">Enviar Mensaje</span>
+                            <span class="lang-en">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Inversiones Doubello LLC. All rights reserved / Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            document.body.classList.toggle('show-en');
+        }
+    </script>
+</body>
+</html>
